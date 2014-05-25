@@ -21,8 +21,8 @@ Or install it yourself as:
 
 ```ruby
 call = EnglishNepaliDateConverter::DateConversion.new
-p call.eng_to_nep(16,01,2014)
-p call.nep_to_eng(03,10,2070)
+call.eng_to_nep(16,01,2014)
+call.nep_to_eng(03,10,2070)
 ```
 
 ## Contributing
