@@ -6,7 +6,7 @@ TODO: Write a gem description
 
 Add this line to your application's Gemfile:
 
-    gem 'english_nepali_date_converter'
+    gem 'englishnepalidateconverter'
 
 And then execute:
 
@@ -14,15 +14,15 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install english_nepali_date_converter
+    $ gem install englishnepalidateconverter
 
 ## Usage
 
 
 ```ruby
-call = EnglishNepaliDateConverter::DateConversion.new
-call.eng_to_nep(16,01,2014)
-call.nep_to_eng(03,10,2070)
+date = EnglishNepaliDateConverter::DateConversion.new
+date.eng_to_nep(16,01,2014)
+date.nep_to_eng(03,10,2070)
 ```
 
 ## Contributing
