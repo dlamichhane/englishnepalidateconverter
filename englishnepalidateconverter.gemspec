@@ -6,7 +6,7 @@ require 'englishnepalidateconverter/version'
 Gem::Specification.new do |spec|
   spec.name          = "englishnepalidateconverter"
   spec.version       = EnglishNepaliDateConverter::VERSION
-  spec.date          = %{2014-01-16}
+  spec.date          = %{2014-08-20}
   spec.authors       = ["dlamichhane"]
   spec.email         = ["dlamichhane@hotmail.com"]
   spec.description   = %q{"Conversion of Gregorian calendar to Nepali Calendar"}
