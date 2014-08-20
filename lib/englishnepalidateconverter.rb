@@ -6,6 +6,6 @@ require "englishnepalidateconverter/constants"
 require "englishnepalidateconverter/bs_date"
 require "englishnepalidateconverter/date_conversion"
 
-date = EnglishNepaliDateConverter::DateConversion.new
-# date.nep_to_eng(12, 02, 2041)
-p date.eng_to_nep("09", "09", 1984)
+# date = EnglishNepaliDateConverter::DateConversion.new
+# date.nep_to_eng(00, 02, 2041)
+# date.eng_to_nep(42, 12, 2001)

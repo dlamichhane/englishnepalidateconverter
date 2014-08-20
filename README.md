@@ -1,6 +1,7 @@
 # EnglishNepaliDateConverter
 
-TODO: Write a gem description
+This EnglishNepaliDateConverter gem converts the AD to BS date between 01-01-1944 to 31-12-2033
+and BS to AD date between 01-01-2000 to 30-12-2090
 
 ## Installation
 
