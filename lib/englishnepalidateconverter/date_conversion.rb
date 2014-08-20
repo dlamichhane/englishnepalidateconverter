@@ -46,7 +46,7 @@ module EnglishNepaliDateConverter
       year = (0..90).collect {|year| BsDate::BS_DATES[year][0]}
       invalid << "month" unless (1..12).include?(date[1])
       invalid << "year" unless year.index(date[2])
-      invalid << "day" if invalid.empty? && BsDate::BS_DATES[year.index(date[2])][date[1]] < date[0]
+      invalid << "day" if invalid.empty? && (date[0] == 0 || BsDate::BS_DATES[year.index(date[2])][date[1]] < date[0])
       invalid
     end
 
