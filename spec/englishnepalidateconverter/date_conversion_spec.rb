@@ -1,80 +1,107 @@
-require 'spec_helper'
+# frozen_string_literal: true
 
-describe "Date Conversion" do
-	before(:each) do
-	  @date = EnglishNepaliDateConverter::DateConversion.new
-	end
+require "spec_helper"
 
-	context "from Gregorian to Nepali Calendar" do
-		it "should have appropriate days of the month" do
-			@date.eng_to_nep(42, 01, 2013).should == ["Enter appropriate day"]
-			@date.eng_to_nep(31, 01, 2013)
-			@date.day_in_month.should == 18
-			@date.day_of_week.should == 5
-			@date.month.should == "Magh"
-			@date.month_number.should == 10
-			@date.week_day.should == "Bihibar"
-			@date.year.should == 2069
-		end
+# rubocop:disable Metrics/BlockLength
 
-		it "should have appropriate month" do
-			@date.eng_to_nep(01, 41, 2013).should == ["Enter appropriate month"]
-			@date.eng_to_nep(01, 00, 2013).should == ["Enter appropriate month"]
-			@date.eng_to_nep(01, 01, 2013)
-			@date.day_in_month.should == 17
-			@date.day_of_week.should == 3
-			@date.month.should == "Poush"
-			@date.month_number.should == 9
-			@date.week_day.should == "Mangalbar"
-			@date.year.should == 2069
-		end
+describe EnglishNepaliDateConverter::DateConversion do
+  let(:described_instance) { described_class.new }
 
-		it "should have appropriate year" do
-			@date.eng_to_nep(01, 11, 2093).should == ["Enter appropriate year"]
-			@date.eng_to_nep("01", "01", "2013")
-			@date.day_in_month.should == 17
-			@date.day_of_week.should == 3
-			@date.month.should == "Poush"
-			@date.month_number.should == 9
-			@date.week_day.should == "Mangalbar"
-			@date.year.should == 2069
-		end
-	end
+  describe "from Gregorian to Nepali Calendar" do
+    context "invalid day" do
+      let(:subject) { described_instance.eng_to_nep(42, 0o1, 2013) }
+      it "should return error message" do
+        expect(subject).to eq(["Enter appropriate day"])
+      end
+    end
 
-	context "from Nepali Calendar to Gregorian calendar" do
-		it "should convert date range only from 01-01-2000 to 30-12-2090" do
-			@date.nep_to_eng(01, 01, 1943).should == ["Enter appropriate year"]
-			@date.nep_to_eng(01, 01, 3043).should == ["Enter appropriate year"]
-			@date.nep_to_eng(01, 01, 2033)
-			@date.year.should == 1976
-			@date.day_of_week.should == 3
-			@date.month.should == "April"
-			@date.day_in_month.should == 13
-			@date.month_number.should == 4
-			@date.week_day.should == "Tuesday"
-		end
+    context "valid date" do
+      let(:subject) { described_instance.eng_to_nep(31, 0o1, 2013) }
+      it "should have appropriate days of the month" do
+        subject
 
-		it "should have appropriate days of the month" do
-			@date.nep_to_eng(42, 12, 2001).should == ["Enter appropriate day"]
-			@date.nep_to_eng(12, 01, 2013)
-			@date.day_in_month.should == 24
-			@date.day_of_week.should == 3
-			@date.month.should == "April"
-			@date.month_number.should == 4
-			@date.week_day.should == "Tuesday"
-			@date.year.should == 1956
-		end
+        expect(subject.day_in_month).to eq(18)
+        expect(subject.day_of_week).to eq(5)
+        expect(subject.month).to eq("Magh")
+        expect(subject.month_number).to eq(10)
+        expect(subject.week_day).to eq("Bihibar")
+        expect(subject.year).to eq(2069)
+      end
+    end
 
-		it "should have appropriate month" do
-			@date.nep_to_eng(12, 00, 2013).should == ["Enter appropriate month"]
-			@date.nep_to_eng(12, 14, 2013).should == ["Enter appropriate month"]
-			@date.nep_to_eng(12, 11, 2013)
-			@date.day_in_month.should == 23
-			@date.day_of_week.should == 7
-			@date.month.should == "February"
-			@date.month_number.should == 2
-			@date.week_day.should == "Saturday"
-			@date.year.should == 1957
-		end
-	end
+    context "invalid month" do
+      let(:subject) { described_instance.eng_to_nep(0o1, 41, 2013) }
+      it "should return error message" do
+        expect(subject).to eq(["Enter appropriate month"])
+      end
+    end
+
+    context "invalid month" do
+      let(:subject) { described_instance.eng_to_nep(0o1, 41, 2013) }
+      it "should have appropriate month" do
+        expect(subject).to eq(["Enter appropriate month"])
+      end
+    end
+
+    context "invalid year" do
+      let(:subject) { described_instance.eng_to_nep(0o1, 11, 2093) }
+      it "should have appropriate year" do
+        expect(subject).to eq(["Enter appropriate year"])
+      end
+    end
+  end
+
+  describe "from Nepali Calendar to Gregorian calendar" do
+    context "invalid year" do
+      let(:subject) { described_instance.nep_to_eng(0o1, 0o1, year_value) }
+
+      context "with less than 2000" do
+        let(:year_value) { 1943 }
+        it "should return error message" do
+          expect(subject).to eq(["Enter appropriate year"])
+        end
+      end
+
+      context "with more than 2090" do
+        let(:year_value) { 3043 }
+        it "should return error message" do
+          expect(subject).to eq(["Enter appropriate year"])
+        end
+      end
+    end
+
+    context "valid date" do
+      let(:subject) { described_instance.nep_to_eng(0o1, 0o1, 2033) }
+
+      context "with valid year" do
+        it "converts date range successfully" do
+          subject
+
+          expect(subject.year).to eq(1976)
+          expect(subject.day_of_week).to eq(3)
+          expect(subject.month).to eq("April")
+          expect(subject.day_in_month).to eq(13)
+          expect(subject.month_number).to eq(4)
+          expect(subject.week_day).to eq("Tuesday")
+        end
+      end
+    end
+
+    context "invalid day" do
+      let(:subject) { described_instance.nep_to_eng(42, 12, 2001) }
+
+      it "should return error message" do
+        expect(subject).to eq(["Enter appropriate day"])
+      end
+    end
+
+    context "invalid month" do
+      let(:subject) { described_instance.nep_to_eng(12, 14, 2013) }
+      it "should return error message" do
+        expect(subject).to eq(["Enter appropriate month"])
+      end
+    end
+  end
 end
+
+# rubocop:enable Metrics/BlockLength
