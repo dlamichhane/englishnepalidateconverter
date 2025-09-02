@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.date          = %(2025-09-01)
   spec.authors       = ["dlamichhane"]
   spec.email         = ["lamichhanedeepak@gmail.com"]
-  spec.description   = '"Conversion of Gregorian calendar to Nepali Calendar"'
+  spec.description   = "Conversion of Gregorian calendar to Nepali Calendar"
   spec.summary       = "Converts the English calendar date to Nepali calendar date"
   spec.homepage      = "https://github.com/dlamichhane/englishnepalidateconverter"
   spec.licenses = ["MIT"]
