@@ -2,12 +2,31 @@
 
 $LOAD_PATH << File.dirname(__FILE__)
 
-require "englishnepalidateconverter/version"
+require_relative "englishnepalidateconverter/version"
 require "date"
-require "englishnepalidateconverter/constants"
-require "englishnepalidateconverter/bs_date"
-require "englishnepalidateconverter/date_conversion"
+require_relative "englishnepalidateconverter/bs_date"
+require_relative "englishnepalidateconverter/bs_calendar"
+require_relative "englishnepalidateconverter/extensions/date"
+require_relative "englishnepalidateconverter/extensions/integer"
 
-# date = EnglishNepaliDateConverter::DateConversion.new
-# date.nep_to_eng(01, 01, 2033)
-# date.eng_to_nep(42, 12, 2001)
+module EnglishNepaliDateConverter
+  class Error < StandardError; end
+
+  # Date out of range error
+  class DateOutOfRangeError < Error
+    def initialize(message = "Date out of range")
+      super(message)
+    end
+  end
+
+  # BS Date out of range error
+  class BSDateOutOfRangeError < Error
+    def initialize(message = "BS Date out of range")
+      super(message)
+    end
+  end
+end
+
+BSDate = EnglishNepaliDateConverter::BSDate
+DateOutOfRangeError = EnglishNepaliDateConverter::DateOutOfRangeError
+BSDateOutOfRangeError = EnglishNepaliDateConverter::BSDateOutOfRangeError
