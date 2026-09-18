@@ -30,10 +30,10 @@ require 'englishnepalidateconverter'
 
 # Create a BS date from year, month, day
 bs_date = BSDate.new(2070, 10, 3)
-puts bs_date.to_ad  # => 2014-01-16
+puts bs_date.to_ad  # => 2014-01-17
 
 # Create a BS date from an AD date
-bs_date = BSDate.from_ad(Date.new(2014, 1, 16))
+bs_date = BSDate.from_ad(Date.new(2014, 1, 17))
 puts "#{bs_date.year}-#{bs_date.month}-#{bs_date.day}"  # => 2070-10-3
 
 # Create current BS date (no arguments)
@@ -45,7 +45,7 @@ puts current_bs.to_ad
 
 ```ruby
 # Convert AD date to BS using Date extension
-ad_date = Date.new(2014, 1, 16)
+ad_date = Date.new(2014, 1, 17)
 bs_date = ad_date.to_bs
 puts "#{bs_date.year}-#{bs_date.month}-#{bs_date.day}"  # => 2070-10-3
 ```
@@ -56,22 +56,22 @@ puts "#{bs_date.year}-#{bs_date.month}-#{bs_date.day}"  # => 2070-10-3
 bs_date = BSDate.new(2070, 10, 3)
 
 # Get month name in Nepali
-puts bs_date.month_name  # => "मंसिर"
+puts bs_date.month_name  # => "माघ"
 
 # Get month name in romanized form
-puts bs_date.month_name(romanized: true)  # => "Mangsir"
+puts bs_date.month_name(romanized: true)  # => "Magh"
 
 # Get day name in Nepali
-puts bs_date.day_name  # => "बुधबार"
+puts bs_date.day_name  # => "शुक्रबार"
 
 # Get day name in romanized form
-puts bs_date.day_name(romanized: true)  # => "Budhbar"
+puts bs_date.day_name(romanized: true)  # => "Shukrabar"
 
 # Get day name in English
-puts bs_date.day_name(localized: true)  # => "Wednesday"
+puts bs_date.day_name(localized: true)  # => "Friday"
 
 # Get formatted Nepali date string
-puts bs_date.to_nepali  # => "मंसिर ३, २०७०"
+puts bs_date.to_nepali  # => "माघ ३, २०७०"
 ```
 
 ### Integer Extensions for Nepali Numbers
